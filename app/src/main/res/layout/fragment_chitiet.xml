@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ChitietFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="11">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#15B4FB"
+            android:layout_weight="10">
+
+            <TextView
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="Chi tiết"
+                android:gravity="center_vertical"
+                android:textSize="25dp"
+                android:textColor="@color/white"
+                android:drawablePadding="20dp"
+                android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                android:layout_marginRight="15dp"
+             >
+            </TextView>
+            <LinearLayout
+                android:layout_weight="5"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tv_xoa"
+                    android:background="@drawable/ic_baseline_delete_24"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    android:layout_margin="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_height="wrap_content">
+
+                            <androidx.cardview.widget.CardView
+                                app:cardCornerRadius="1500dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_width="40dp"
+                                android:layout_gravity="center"
+                                android:layout_height="40dp">
+                                <ImageView
+                                    android:layout_margin="10dp"
+                                    android:layout_gravity="center"
+                                    android:id="@+id/imv_icon_chitiet"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"/>
+                            </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:id="@+id/tv_tenchude_chitiet"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="20dp"
+                                android:text="Thuốc lá"
+                                android:textColor="@color/black"
+                                android:textSize="17dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:id="@+id/tv_chitiet_tien"
+                                    android:textStyle="bold"
+                                    android:paddingRight="20dp"
+                                    android:gravity="center_vertical"
+                                    android:text="50000"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#C8E3E3E3"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_marginLeft="20dp"
+                                android:layout_gravity="center"
+                                android:padding="10dp"
+                                android:background="@drawable/ic_workflow__1_"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
+
+                            <TextView
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="20dp"
+                                android:text="Phân loại"
+                                android:textColor="@color/black"
+                                android:textSize="17dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:id="@+id/tv_tenloai_chitieu"
+                                    android:paddingRight="20dp"
+                                    android:gravity="center_vertical"
+                                    android:text="Chi tiêu"
+                                    android:textColor="@color/black"
+                                    android:textSize="17dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#C8E3E3E3"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_marginLeft="20dp"
+                                android:layout_gravity="center"
+                                android:padding="10dp"
+                                android:background="@drawable/ic_timetable"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
+
+                            <TextView
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="20dp"
+                                android:text="Ngày Tháng"
+                                android:textColor="@color/black"
+                                android:textSize="17dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:id="@+id/tv_chitiet_ngay"
+                                    android:paddingRight="20dp"
+                                    android:gravity="center_vertical"
+                                    android:text="15/04/2022"
+                                    android:textColor="@color/black"
+                                    android:textSize="17dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#C8E3E3E3"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_marginLeft="20dp"
+                                android:layout_gravity="center"
+                                android:padding="10dp"
+                                android:background="@drawable/ic_pencil"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"/>
+                            <TextView
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="20dp"
+                                android:text="Ghi Chú"
+                                android:textColor="@color/black"
+                                android:textSize="17dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <TextView
+                                    android:id="@+id/tv_chitiet_ghichu"
+                                    android:paddingRight="20dp"
+                                    android:gravity="center_vertical"
+                                    android:text="Đây là đâu"
+                                    android:textColor="@color/black"
+                                    android:textSize="17dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="#C8E3E3E3"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_chinhsua"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_pen"
+                    android:padding="15dp"
+                    android:background="@drawable/bobutton"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chỉnh sửa"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

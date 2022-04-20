@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    app:startDestination="@id/trangChuFragment">
+    <fragment
+        android:id="@+id/trangChuFragment"
+        android:name="com.example.chitieuthongminh.TrangChuFragment"
+        android:label="fragment_trang_chu"
+        tools:layout="@layout/fragment_trang_chu" >
+        <action
+            android:id="@+id/action_trangChuFragment_to_chitietFragment"
+            app:destination="@id/chitietFragment" />
+        <action
+            android:id="@+id/action_trangChuFragment_to_phanLoaiFragment"
+            app:destination="@id/phanLoaiFragment" />
+        <action
+            android:id="@+id/action_trangChuFragment_to_addChiTieuFragment"
+            app:destination="@id/addChiTieuFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/chitietFragment"
+        android:name="com.example.chitieuthongminh.ChitietFragment"
+        android:label="fragment_chitiet"
+        tools:layout="@layout/fragment_chitiet" >
+        <action
+            android:id="@+id/action_chitietFragment_to_updateChiTieuFragment"
+            app:destination="@id/updateChiTieuFragment" />
+        <action
+            android:id="@+id/action_chitietFragment_to_trangChuFragment"
+            app:destination="@id/trangChuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addChiTieuFragment"
+        android:name="com.example.chitieuthongminh.AddChiTieuFragment"
+        android:label="fragment_add_chi_tieu"
+        tools:layout="@layout/fragment_add_chi_tieu" >
+        <action
+            android:id="@+id/action_addChiTieuFragment_to_trangChuFragment"
+            app:destination="@id/trangChuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/phanLoaiFragment"
+        android:name="com.example.chitieuthongminh.PhanLoaiFragment"
+        android:label="fragment_phan_loai"
+        tools:layout="@layout/fragment_phan_loai" >
+        <action
+            android:id="@+id/action_phanLoaiFragment_to_updateLoaiChiTieuFragment"
+            app:destination="@id/updateLoaiChiTieuFragment"
+            app:popUpTo="@id/phanLoaiFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_phanLoaiFragment_to_updateLoaiThuNhapFragment"
+            app:destination="@id/updateLoaiThuNhapFragment"
+            app:popUpTo="@id/phanLoaiFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateChiTieuFragment"
+        android:name="com.example.chitieuthongminh.UpdateChiTieuFragment"
+        android:label="fragment_update_chi_tieu"
+        tools:layout="@layout/fragment_update_chi_tieu" >
+        <action
+            android:id="@+id/action_updateChiTieuFragment_to_trangChuFragment"
+            app:destination="@id/trangChuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateLoaiChiTieuFragment"
+        android:name="com.example.chitieuthongminh.UpdateLoaiChiTieuFragment"
+        android:label="fragment_update_loai_chi_tieu"
+        tools:layout="@layout/fragment_update_loai_chi_tieu" >
+        <action
+            android:id="@+id/action_updateLoaiChiTieuFragment_to_phanLoaiFragment"
+            app:destination="@id/phanLoaiFragment"
+            app:popUpTo="@id/updateLoaiChiTieuFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateLoaiThuNhapFragment"
+        android:name="com.example.chitieuthongminh.UpdateLoaiThuNhapFragment"
+        android:label="fragment_update_loai_thu_nhap"
+        tools:layout="@layout/fragment_update_loai_thu_nhap" >
+        <action
+            android:id="@+id/action_updateLoaiThuNhapFragment_to_phanLoaiFragment"
+            app:destination="@id/phanLoaiFragment"
+            app:popUpTo="@id/updateLoaiThuNhapFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+</navigation>
