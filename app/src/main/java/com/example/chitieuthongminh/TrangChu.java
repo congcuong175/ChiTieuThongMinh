@@ -35,7 +35,7 @@ public class TrangChu extends AppCompatActivity {
                         Navigation.findNavController(TrangChu.this,R.id.nav_host_fragment_content_display_man).navigate(R.id.phanLoaiFragment);
                         break;
                     case R.id.favorites:
-
+                        Navigation.findNavController(TrangChu.this,R.id.nav_host_fragment_content_display_man).navigate(R.id.chartFragment);
                        break;
 
                 }

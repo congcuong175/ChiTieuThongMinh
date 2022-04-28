@@ -2,6 +2,7 @@ package com.example.chitieuthongminh.Adapter;
 
 import static com.example.chitieuthongminh.ChiTieuFragment.idlctieu;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class LoaiThuNhapAdapter extends RecyclerView.Adapter<LoaiThuNhapAdapter.
     public void onBindViewHolder(@NonNull LoaiThuNhapViewHolder holder, int position) {
         LoaiThuNhapEntity lct = thuNhapEntities.get(position);
         holder.loaichitieu.setImageResource(lct.getIcon());
+        Log.e("TAG",lct.getIcon()+"");
         holder.tv_chuDe.setText(lct.getTenLoai());
         holder.btn_xoa.setOnClickListener(new View.OnClickListener() {
             @Override

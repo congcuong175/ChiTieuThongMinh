@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_trangChuFragment_to_addChiTieuFragment"
             app:destination="@id/addChiTieuFragment" />
+        <action
+            android:id="@+id/action_trangChuFragment_to_chartFragment"
+            app:destination="@id/chartFragment" />
 
     </fragment>
     <fragment
@@ -88,6 +91,11 @@
             app:popUpTo="@id/updateLoaiThuNhapFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/chartFragment"
+        android:name="com.example.chitieuthongminh.ChartFragment"
+        android:label="fragment_chart"
+        tools:layout="@layout/fragment_chart" />
 
 
 </navigation>
