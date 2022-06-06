@@ -62,25 +62,25 @@ public class UpdateLoaiChiTieuFragment extends Fragment {
         list=new ArrayList<>();
 
         list.add(R.drawable.icon);
-        list.add(R.drawable.ic_pen);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
-        list.add(R.drawable.icon);
+        list.add(R.drawable.ic_alarm_clock);
+        list.add(R.drawable.ic_backpack);
+        list.add(R.drawable.ic_broccoli);
+        list.add(R.drawable.ic_highlighter);
+        list.add(R.drawable.ic_house);
+        list.add(R.drawable.ic_school_bus);
+        list.add(R.drawable.ic_sport_equipment);
+        list.add(R.drawable.ic_tangerine);
+        list.add(R.drawable.ic_accumulator);
+        list.add(R.drawable.ic_delivery_bike);
+        list.add(R.drawable.ic_doctor);
+        list.add(R.drawable.ic_fries);
+        list.add(R.drawable.ic_playground);
+        list.add(R.drawable.ic_coke);
+        list.add(R.drawable.ic_cake_slice);
+        list.add(R.drawable.ic_sweets);
+        list.add(R.drawable.ic_taxi);
+        list.add(R.drawable.ic_sign);
+        list.add(R.drawable.ic_soccer_player);
         IconAdapter adapter=new IconAdapter(getContext(),list,R.layout.item_icon);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -133,4 +133,5 @@ public class UpdateLoaiChiTieuFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_update_loai_chi_tieu, container, false);
     }
+
 }

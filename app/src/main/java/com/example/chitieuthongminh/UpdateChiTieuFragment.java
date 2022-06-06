@@ -7,6 +7,8 @@ import static com.example.chitieuthongminh.TrangChu.lnlout_chipnv;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,9 +16,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -58,6 +63,7 @@ public class UpdateChiTieuFragment extends Fragment {
     LTNAdapter ltnAdapter;
     List<LoaiThuNhapEntity> list2;
     Dialog dialog;
+    Dialog dialogld;
     public UpdateChiTieuFragment() {
         // Required empty public constructor
     }
@@ -73,6 +79,7 @@ public class UpdateChiTieuFragment extends Fragment {
         imv_icon_add=view.findViewById(R.id.imv_icon_add);
         list=new ArrayList<>();
         list2=new ArrayList<>();
+        showDialogld();
         lctAdapter=new LCTAdapter(getContext(),R.layout.item_layout_dialog,list);
         ltnAdapter=new LTNAdapter(getContext(),R.layout.item_layout_dialog,list2);
         tv_gio = view.findViewById(R.id.tv_gio);
@@ -98,6 +105,7 @@ public class UpdateChiTieuFragment extends Fragment {
         btn_hoantat_add_chitieuorthunhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialogld.show();
                 ChiTietChiTieu chiTietChiTieu = new ChiTietChiTieu();
                 chiTietChiTieu.setMaChiTieu(chitiet_chitieu.getMaChiTieu());
                 chiTietChiTieu.setMaLoaiChiTieu(chitiet_chitieu.getMaLoaiChiTieu());
@@ -109,14 +117,14 @@ public class UpdateChiTieuFragment extends Fragment {
                 ApiService.apiservice.updateCT(chitiet_chitieu.getMaChiTieu(),chiTietChiTieu).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-
+                        dialogld.hide();
                         Navigation.findNavController(view).navigate(R.id.action_updateChiTieuFragment_to_trangChuFragment);
                         lnlout_chipnv.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-
+                        dialogld.hide();
                     }
                 });
             }
@@ -221,5 +229,19 @@ public class UpdateChiTieuFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_update_chi_tieu, container, false);
+    }
+    public void showDialogld(){
+        dialogld=new Dialog(getContext());
+        dialogld.setContentView(R.layout.itemloaddata);
+        dialogld.setCancelable(false);
+        Window window=dialogld.getWindow();
+        if(window==null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams layoutParams=window.getAttributes();
+        layoutParams.gravity= Gravity.CENTER;
+        window.setAttributes(layoutParams);
     }
 }

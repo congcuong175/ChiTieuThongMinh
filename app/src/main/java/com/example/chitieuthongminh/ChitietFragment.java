@@ -4,6 +4,9 @@ import static com.example.chitieuthongminh.ChiTieuFragment.idchitietct;
 import static com.example.chitieuthongminh.TrangChu.chipNavigationBar;
 import static com.example.chitieuthongminh.TrangChu.lnlout_chipnv;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,9 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,6 +40,7 @@ public class ChitietFragment extends Fragment {
     TextView tv_chitiet_tien,tv_tenloai_chitieu,tv_chitiet_ngay,tv_chitiet_ghichu,tv_tenchude_chitiet,tv_xoa;
     ImageView imv_icon_chitiet;
     public static ChiTietChiTieu chitiet_chitieu;
+    Dialog dialog;
     public ChitietFragment() {
 
     }
@@ -42,6 +49,7 @@ public class ChitietFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         button=view.findViewById(R.id.btn_chinhsua);
+        showDialog();
         tv_chitiet_tien=view.findViewById(R.id.tv_chitiet_tien);
         tv_tenloai_chitieu=view.findViewById(R.id.tv_tenloai_chitieu);
         tv_chitiet_ngay=view.findViewById(R.id.tv_chitiet_ngay);
@@ -83,19 +91,26 @@ public class ChitietFragment extends Fragment {
         tv_xoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ApiService.apiservice.xoaCT(idchitietct).enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        Toast.makeText(getContext(),"Xóa thành công",Toast.LENGTH_SHORT).show();
-                        lnlout_chipnv.setVisibility(View.VISIBLE);
-                        Navigation.findNavController(view).navigate(R.id.action_chitietFragment_to_trangChuFragment);
-                    }
+                try{
+                    dialog.show();
+                    ApiService.apiservice.xoaCT(idchitietct).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Toast.makeText(getContext(),"Xóa thành công",Toast.LENGTH_SHORT).show();
+                            lnlout_chipnv.setVisibility(View.VISIBLE);
+                            dialog.hide();
+                            Navigation.findNavController(view).navigate(R.id.action_chitietFragment_to_trangChuFragment);
+                        }
 
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            dialog.hide();
+                        }
+                    });
+                }
+                catch (Exception ex){
+                    Navigation.findNavController(view).navigate(R.id.action_chitietFragment_to_trangChuFragment);
+                }
             }
         });
     }
@@ -104,5 +119,19 @@ public class ChitietFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_chitiet, container, false);
+    }
+    public void showDialog(){
+        dialog=new Dialog(getContext());
+        dialog.setContentView(R.layout.itemloaddata);
+        dialog.setCancelable(false);
+        Window window=dialog.getWindow();
+        if(window==null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams layoutParams=window.getAttributes();
+        layoutParams.gravity= Gravity.CENTER;
+        window.setAttributes(layoutParams);
     }
 }

@@ -24,7 +24,7 @@ public interface ApiService {
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
     ApiService apiservice=new Retrofit.Builder()
-            .baseUrl("https://apiqlchitieu.conveyor.cloud/")
+            .baseUrl("https://apiqlchitieu-ra4.conveyor.cloud/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);

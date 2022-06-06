@@ -88,36 +88,40 @@ public class TrangChuFragment extends Fragment {
         arrayList.clear();
         chitieu=0;
         thunhap=0;
-        ApiService.apiservice.getCT().enqueue(new Callback<List<ChiTietEntity>>() {
-            @Override
-            public void onResponse(Call<List<ChiTietEntity>> call, Response<List<ChiTietEntity>> response) {
-                if(response.body()!=null){
-                    for (ChiTietEntity ct:response.body()
-                    ) {
-                        arrayList.add(ct);
-                        for (ChiTietChiTieu ctct:ct.getList()
+        try {
+            ApiService.apiservice.getCT().enqueue(new Callback<List<ChiTietEntity>>() {
+                @Override
+                public void onResponse(Call<List<ChiTietEntity>> call, Response<List<ChiTietEntity>> response) {
+                    if(response.body()!=null){
+                        for (ChiTietEntity ct:response.body()
                         ) {
-                            if(ctct.isChiTieu()){
-                                chitieu+=ctct.getTien();
+                            arrayList.add(ct);
+                            for (ChiTietChiTieu ctct:ct.getList()
+                            ) {
+                                if(ctct.isChiTieu()){
+                                    chitieu+=ctct.getTien();
 
-                            }
-                            else {
-                                thunhap+=ctct.getTien();
+                                }
+                                else {
+                                    thunhap+=ctct.getTien();
+                                }
                             }
                         }
+                        chiTieuAdapter.setData(arrayList);
+                        tv_tongchitieu.setText(currencyFormat(chitieu+""));
+                        tv_tongthunhap.setText(currencyFormat(thunhap+""));
+                        tv_sodu.setText(currencyFormat((thunhap-chitieu)+""));
                     }
-                    chiTieuAdapter.setData(arrayList);
-                    tv_tongchitieu.setText(currencyFormat(chitieu+""));
-                    tv_tongthunhap.setText(currencyFormat(thunhap+""));
-                    tv_sodu.setText(currencyFormat((thunhap-chitieu)+""));
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<ChiTietEntity>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<List<ChiTietEntity>> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        }catch (Exception ex){
+
+        }
 
     }
     @Override
@@ -132,11 +136,7 @@ public class TrangChuFragment extends Fragment {
         },1000);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        handler2.removeCallbacks(runnable2);
-    }
+
     public static String currencyFormat(String amount) {
         DecimalFormat formatter = new DecimalFormat("###,###,##0");
         return formatter.format(Double.parseDouble(amount));

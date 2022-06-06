@@ -2,9 +2,15 @@ package com.example.chitieuthongminh;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -30,11 +36,13 @@ public class addLoaiThuNhap extends AppCompatActivity {
     TextView tv_addthunhap;
     ImageView imv_icon_addthunhap;
     EditText edt_nhaptenloai_addthunhap;
+    Dialog dialog;
     int chonanh=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_loai_thu_nhap);
+        showDialog();
         gridView=findViewById(R.id.list_icon_thunhap);
         imv_icon_addthunhap=findViewById(R.id.imv_icon_addthunhap);
         tv_addthunhap=findViewById(R.id.tv_add_thunhap_hoanthanh);
@@ -72,6 +80,7 @@ public class addLoaiThuNhap extends AppCompatActivity {
         tv_addthunhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.show();
                 LoaiThuNhapEntity loaiThuNhapEntity=new LoaiThuNhapEntity();
                 loaiThuNhapEntity.setTenLoai(edt_nhaptenloai_addthunhap.getText().toString());
                 if(chonanh==0){
@@ -82,12 +91,14 @@ public class addLoaiThuNhap extends AppCompatActivity {
                     ApiService.apiservice.themLTN(loaiThuNhapEntity).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
+                            dialog.hide();
                             startActivity(new Intent(addLoaiThuNhap.this,TrangChu.class));
                             Toast.makeText(addLoaiThuNhap.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
+                            dialog.hide();
                             Toast.makeText(addLoaiThuNhap.this, "Thêm không thành công", Toast.LENGTH_SHORT).show();
 
                         }
@@ -96,5 +107,19 @@ public class addLoaiThuNhap extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void showDialog(){
+        dialog=new Dialog(addLoaiThuNhap.this);
+        dialog.setContentView(R.layout.itemloaddata);
+        dialog.setCancelable(false);
+        Window window=dialog.getWindow();
+        if(window==null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams layoutParams=window.getAttributes();
+        layoutParams.gravity= Gravity.CENTER;
+        window.setAttributes(layoutParams);
     }
 }

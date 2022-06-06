@@ -2,10 +2,16 @@ package com.example.chitieuthongminh.Adapter;
 
 import static com.example.chitieuthongminh.ChiTieuFragment.idlctieu;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +33,7 @@ import retrofit2.Response;
 
 public class LoaiThuNhapAdapter extends RecyclerView.Adapter<LoaiThuNhapAdapter.LoaiThuNhapViewHolder> {
     List<LoaiThuNhapEntity> thuNhapEntities;
-
+    Dialog dialog;
 
     public void setData(List<LoaiThuNhapEntity> thuNhapEntities) {
         this.thuNhapEntities = thuNhapEntities;
@@ -38,6 +44,17 @@ public class LoaiThuNhapAdapter extends RecyclerView.Adapter<LoaiThuNhapAdapter.
     @Override
     public LoaiThuNhapViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loaithunhap, parent, false);
+        dialog=new Dialog(parent.getContext());
+        dialog.setContentView(R.layout.itemloaddata);
+        dialog.setCancelable(false);
+        Window window=dialog.getWindow();
+        if(window!=null){
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            WindowManager.LayoutParams layoutParams=window.getAttributes();
+            layoutParams.gravity= Gravity.CENTER;
+            window.setAttributes(layoutParams);
+        }
         return new LoaiThuNhapViewHolder(view);
     }
 
@@ -50,15 +67,16 @@ public class LoaiThuNhapAdapter extends RecyclerView.Adapter<LoaiThuNhapAdapter.
         holder.btn_xoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.show();
                 ApiService.apiservice.xoaLTN(lct.getMaLoai()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-
+                        dialog.hide();
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-
+                        dialog.hide();
                     }
                 });
             }

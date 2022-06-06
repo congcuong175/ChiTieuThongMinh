@@ -4,9 +4,16 @@ import static com.example.chitieuthongminh.TrangChu.chipNavigationBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -17,6 +24,7 @@ import android.widget.Toast;
 import com.example.chitieuthongminh.Adapter.IconAdapter;
 import com.example.chitieuthongminh.Api.ApiService;
 import com.example.chitieuthongminh.Entity.LoaiChiTieuEntity;
+import com.example.chitieuthongminh.Entity.LoaiThuNhapEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +40,13 @@ public class addLoaiChiTieu extends AppCompatActivity {
     TextView tv_addchitieu;
     EditText edt_nhaptenloai_addchitieu;
     int chonanh=0;
+    Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_loai_chi_tieu);
         gridView=findViewById(R.id.list_icon);
+        showDialog();
         imv_icon_addchitieu=findViewById(R.id.imv_icon_addchitieu);
         tv_addchitieu=findViewById(R.id.btn_hoanthanh_add);
         edt_nhaptenloai_addchitieu=findViewById(R.id.edt_nhaptenloai_addchitieu);
@@ -74,6 +84,7 @@ public class addLoaiChiTieu extends AppCompatActivity {
         tv_addchitieu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.show();
                 LoaiChiTieuEntity loaiChiTieuEntity=new LoaiChiTieuEntity();
                 loaiChiTieuEntity.setTenLoai(edt_nhaptenloai_addchitieu.getText().toString());
                 if(chonanh==0){
@@ -85,17 +96,33 @@ public class addLoaiChiTieu extends AppCompatActivity {
                 ApiService.apiservice.themLCT(loaiChiTieuEntity).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        dialog.hide();
                         startActivity(new Intent(addLoaiChiTieu.this,TrangChu.class));
+
                         Toast.makeText(addLoaiChiTieu.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
                         Toast.makeText(addLoaiChiTieu.this, "Thêm không thành công", Toast.LENGTH_SHORT).show();
-
+                        dialog.hide();
                     }
                 });
             }
         });
+    }
+    public void showDialog(){
+        dialog=new Dialog(addLoaiChiTieu.this);
+        dialog.setContentView(R.layout.itemloaddata);
+        dialog.setCancelable(false);
+        Window window=dialog.getWindow();
+        if(window==null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams layoutParams=window.getAttributes();
+        layoutParams.gravity= Gravity.CENTER;
+        window.setAttributes(layoutParams);
     }
 }

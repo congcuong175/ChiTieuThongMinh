@@ -3,6 +3,8 @@ package com.example.chitieuthongminh;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,9 +18,12 @@ import androidx.viewpager.widget.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -71,10 +76,12 @@ LTNAdapter ltnAdapter;
     boolean ktloaichitieu=true;
     int maphanloai=0;
     Dialog dialog;
+    Dialog dialogld;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         edt_tien = view.findViewById(R.id.edt_nhaptien);
+        showDialogLoader();
         tv_ngaythang = view.findViewById(R.id.tv_ngaythang);
         date_picker_dialog = view.findViewById(R.id.date_picker_dialog);
         time_picker_dialog = view.findViewById(R.id.time_picker_dialog);
@@ -109,9 +116,9 @@ LTNAdapter ltnAdapter;
         btn_hoantat_add_chitieuorthunhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.show();
                 ChiTietChiTieu chiTietChiTieu = new ChiTietChiTieu();
                 chiTietChiTieu.setMaLoaiChiTieu(maphanloai);
-
                 chiTietChiTieu.setChiTieu(ktloaichitieu);
                 chiTietChiTieu.setNgayThang(tv_ngaythang.getText().toString());
                 chiTietChiTieu.setThoiGian(tv_gio.getText().toString());
@@ -121,12 +128,13 @@ LTNAdapter ltnAdapter;
                 ApiService.apiservice.themCT(chiTietChiTieu).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        dialog.hide();
                         Navigation.findNavController(view).navigate(R.id.action_addChiTieuFragment_to_trangChuFragment);
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-
+                        dialog.hide();
                     }
                 });
             }
@@ -198,7 +206,20 @@ LTNAdapter ltnAdapter;
         });
         dialog.show();
     }
-
+    public void showDialogLoader(){
+        dialogld=new Dialog(getContext());
+        dialogld.setContentView(R.layout.itemloaddata);
+        dialogld.setCancelable(false);
+        Window window=dialogld.getWindow();
+        if(window==null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams layoutParams=window.getAttributes();
+        layoutParams.gravity= Gravity.CENTER;
+        window.setAttributes(layoutParams);
+    }
     private void ChonNgay() {
         Calendar calendar = Calendar.getInstance();
         int ngay = calendar.get(Calendar.DATE);
